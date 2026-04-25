@@ -1,0 +1,188 @@
+:root {
+  --bg: #05070d;
+  --panel: rgba(10, 14, 24, 0.78);
+  --panel-border: rgba(120, 170, 255, 0.18);
+  --fg: #e8eef9;
+  --muted: #8a9ab5;
+  --accent: #6ee0ff;
+  --accent-strong: #22b8ff;
+  --hot: #ff7a59;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, #0b1428 0%, var(--bg) 70%);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden;
+}
+
+#globe {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+#panel {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  width: 340px;
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 16px 12px;
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+#panel header h1 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+#panel header h1 .tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 6px;
+  color: var(--accent);
+  background: rgba(110, 224, 255, 0.12);
+  border: 1px solid rgba(110, 224, 255, 0.35);
+  vertical-align: middle;
+}
+#panel header .sub {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.ctrl label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
+.ctrl label.row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; color: var(--fg); font-size: 13px; }
+.ctrl label.row input { accent-color: var(--accent-strong); }
+
+#search {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color .15s, background .15s;
+}
+#search:focus { border-color: var(--accent); background: rgba(110, 224, 255, 0.06); }
+
+#airline-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  max-height: 260px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+#airline-list li {
+  padding: 8px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+#airline-list li:last-child { border-bottom: 0; }
+#airline-list li:hover { background: rgba(110, 224, 255, 0.07); }
+#airline-list li.active { background: rgba(34, 184, 255, 0.18); color: var(--accent); }
+#airline-list li .meta { color: var(--muted); font-size: 11px; }
+#airline-list li .iata {
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+
+.info {
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  min-height: 56px;
+}
+.info .name { font-weight: 600; font-size: 13px; }
+.info .stat { display: flex; justify-content: space-between; margin-top: 2px; color: var(--muted); }
+.info .stat b { color: var(--fg); font-weight: 600; }
+.info .placeholder { color: var(--muted); }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--muted);
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  vertical-align: middle;
+  animation: pulse 1.6s infinite;
+}
+.status.idle::before { animation: none; background: var(--muted); box-shadow: none; }
+.status.live::before { background: #4adf73; box-shadow: 0 0 8px #4adf73; }
+.status.error::before { background: var(--hot); box-shadow: 0 0 8px var(--hot); }
+@keyframes pulse { 50% { opacity: 0.35; } }
+
+.tip {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  padding: 6px 9px;
+  font-size: 12px;
+  border-radius: 6px;
+  background: rgba(8, 12, 24, 0.92);
+  border: 1px solid rgba(110, 224, 255, 0.35);
+  color: var(--fg);
+  white-space: nowrap;
+  transform: translate(12px, 12px);
+}
+.tip b { color: var(--accent); }
+
+@media (max-width: 600px) {
+  #panel {
+    width: calc(100vw - 24px);
+    left: 12px;
+    top: 12px;
+    max-height: 50vh;
+  }
+}
