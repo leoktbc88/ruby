@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "HKJC Data Reader",
+  "version": "0.0.1",
+  "description": "Hello world scaffold for the HKJC data reader extension.",
+  "action": {
+    "default_title": "HKJC Data Reader",
+    "default_popup": "popup.html"
+  }
+}
