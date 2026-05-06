@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flight Routes 3D Globe</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/globe.gl@2.32.0/dist/globe.gl.min.js"></script>
+</head>
+<body>
+  <div id="globe"></div>
+
+  <aside id="panel">
+    <header>
+      <h1>Flight Routes <span class="tag">3D</span></h1>
+      <p class="sub">Pick an airline to see its global route network. Live aircraft are streamed from the OpenSky Network every 15&nbsp;s and matched by callsign prefix.</p>
+    </header>
+
+    <section class="ctrl">
+      <label for="search">Airline</label>
+      <input id="search" type="text" placeholder="Search by name or IATA..." autocomplete="off" />
+      <ul id="airline-list"></ul>
+    </section>
+
+    <section class="ctrl">
+      <label class="row">
+        <input type="checkbox" id="toggle-live" checked />
+        <span>Show live aircraft</span>
+      </label>
+      <label class="row">
+        <input type="checkbox" id="toggle-routes" checked />
+        <span>Show route arcs</span>
+      </label>
+      <label class="row">
+        <input type="checkbox" id="toggle-airports" checked />
+        <span>Show airports</span>
+      </label>
+    </section>
+
+    <section id="info" class="info"></section>
+    <footer>
+      <span id="status" class="status">loading…</span>
+      <span class="src">data: <a href="https://openflights.org" target="_blank" rel="noopener">OpenFlights</a> · <a href="https://opensky-network.org" target="_blank" rel="noopener">OpenSky</a></span>
+    </footer>
+  </aside>
+
+  <div id="hover-tip" class="tip" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
