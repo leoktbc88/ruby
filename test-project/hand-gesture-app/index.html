@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hand Sparkle Tracker</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Hand Sparkle Tracker</h1>
+        <p>
+          Allow camera access, then move your hand in front of the camera to see
+          skeleton lines and sparkles.
+        </p>
+      </header>
+
+      <section class="stage-wrap">
+        <video id="camera" autoplay playsinline muted></video>
+        <canvas id="overlay"></canvas>
+      </section>
+
+      <section class="controls">
+        <label>
+          Sparkle intensity
+          <input id="intensity" type="range" min="1" max="8" value="4" />
+        </label>
+        <button id="flip" type="button">Flip view: ON</button>
+        <p id="status">Loading hand tracking model…</p>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
